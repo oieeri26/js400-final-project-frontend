@@ -1,5 +1,5 @@
 import React from 'react'
-import Form from './Form'
+import Form from './signup.Component'
 
 export default ({ onSubmit }) => (
   <main className='container'>

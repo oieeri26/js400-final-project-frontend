@@ -26,8 +26,9 @@ class Form extends React.Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className='form-group'>
-          <label htmlFor='username'>Username</label>
+        <div className="form-row">
+        <div className='form-group col-md-6'>
+          <label htmlFor='username'>Email Address</label>
           <input
             className='form-control'
             id='username'
@@ -36,7 +37,7 @@ class Form extends React.Component {
             type='text'
             value={this.state.username} />
         </div>
-        <div className='form-group'>
+        <div className='form-group col-md-6'>
           <label htmlFor='password'>Password</label>
           <input
             className='form-control'
@@ -45,6 +46,7 @@ class Form extends React.Component {
             name='password'
             type='password'
             value={this.state.password} />
+        </div>
         </div>
         <button type='submit' className='btn btn-primary'>Submit</button>
       </form>
