@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 
 // Helpers
 import * as auth from '../api/auth'
-import * as token from './helpers/local-storage'
+import * as token from '../helpers/local-storage'
 
 // Components
 import Header from './shared/Header'
 import Navigation from './shared/Navigation/Navigation'
 import Login from './auth/Login.Form'
 import Signup from './auth/Signup.Form'
+import UsersContainer from './users/Container'
 
 class App extends React.Component {
   constructor () {
@@ -20,8 +21,8 @@ class App extends React.Component {
     }
 
     this.loginUser = this.loginUser.bind(this)
-    // this.logoutUser = this.logoutUser.bind(this)
-    // this.signupUser = this.signupUser.bind(this)
+    this.logoutUser = this.logoutUser.bind(this)
+    this.signupUser = this.signupUser.bind(this)
   }
   
   async componentDidMount () {
@@ -45,6 +46,25 @@ class App extends React.Component {
     } 
   }
 
+  logoutUser () {
+    token.clearToken()
+    this.setState({ currentUserId: null })
+  }
+
+  async signupUser (user) {
+    const response = await auth.signup(user)
+    await token.setToken(response)
+    
+    const profile = await auth.profile()
+    console.log(profile)
+    if (profile.status === 401) {
+      alert('Username already exists!')
+      this.setState({ showAlert: true })
+    } else {
+      this.setState({ currentUserId: profile.user._id })
+    }
+  }
+
   render () {
     const { currentUserId, loading } = this.state
     if (loading) return "loading..." 
@@ -63,13 +83,12 @@ class App extends React.Component {
           <Route path='/signup' exact component={() => {
             return currentUserId ? <Redirect to='/users' /> : <Signup onSubmit={this.signupUser} />
           }} />
-          {/* <Route path='/' render={() => {
+          <Route path='/' render={() => {
             return currentUserId
               ? <UsersContainer currentUserId={currentUserId} />
               : <Redirect to='/login' />
-          }} /> */}
-          <Route path='/' />
-          {/* <Redirect to='/login' /> */}
+          }} />
+          <Redirect to='/login' />
         </Switch>
         </Router>
       </div>

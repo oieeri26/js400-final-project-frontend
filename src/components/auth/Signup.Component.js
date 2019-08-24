@@ -28,14 +28,14 @@ class Form extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className="form-row">
         <div className='form-group col-md-6'>
-          <label htmlFor='username'>Email Address</label>
+          <label htmlFor='email'>Email Address</label>
           <input
             className='form-control'
-            id='username'
+            id='email'
             onChange={this.handleChange}
-            name='username'
+            name='email'
             type='text'
-            value={this.state.username} />
+            value={this.state.email} />
         </div>
         <div className='form-group col-md-6'>
           <label htmlFor='password'>Password</label>
