@@ -6,46 +6,55 @@ import { Route } from 'react-router-dom'
 import * as users from '../../api/users'
 
 // Components
-// import List from './List/List'
-// import AssignmentsContainer from '../assignments/Container'
-// import EditName from './Form/Edit.Name'
+import List from './List/List'
+import PostsContainer from '../posts/Container'
 
 class Container extends React.Component {
-    constructor (props) {
-      super(props)
-      this.state = {
-        users: [],
-        loading: true
-      }
+  constructor (props) {
+    super(props)
+    this.state = {
+      users: [],
+      loading: true
     }
 
-    async componentDidMount () {
-        this.refreshUsers().then(() => this.setState({ loading: false }))
-      }
-    
-    // Internal
-    async refreshUsers () {
-        const { response } = await users.fetchUsers()
-        this.setState({ users: response })
-    }
+    this.refreshUsers = this.refreshUsers.bind(this)
+    this.editUser = this.editUser.bind(this)
 
-    render () {
-        const { currentUserId } = this.props
-        const { users, loading } = this.state
-        if (loading) return <span/>
-    
-        return (
-          <main className='container'>
-            {/* <Route path='/' exact component={() => <List users={users} />} />
-            <PostsContainer
-              currentUserId={currentUserId}
-              refreshUsers={this.refreshUsers}
-              users={users} /> */}
-              <Route path='/' />
-          </main>
-        )
-      }
-    
+  }
+
+  async componentDidMount () {
+    this.refreshUsers().then(() => this.setState({ loading: false }))
+  }
+
+  // Internal
+  async refreshUsers () {
+    const { response } = await users.fetchUsers()
+    this.setState({ users: response })
+  }
+
+  async editUser (user) {
+    const { currentUserId, history } = this.props
+    await users.updateUser({ user: { _id: currentUserId }, user })
+    await this.refreshUsers()
+
+    history.push(`/users/${currentUserId}/posts`)
+  }
+
+  render () {
+    const { currentUserId } = this.props
+    const { users, loading } = this.state
+    if (loading) return <span/>
+
+    return (
+      <main className='container'>
+        <Route path='/users' exact component={() => <List users={users} />} />
+        <PostsContainer
+          currentUserId={currentUserId}
+          refreshUsers={this.refreshUsers}
+          users={users} />
+      </main>
+    )
+  }
 }
 
 export default withRouter(Container)

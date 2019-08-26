@@ -1,7 +1,7 @@
 import React from 'react'
 
 import AuthenticatedStudentLinks from './Navigation.Student.AuthenticatedLinks'
-import AuthenticatedAdminLinks from './Navigation.Admin.AuthenticatedLinks'
+// import AuthenticatedAdminLinks from './Navigation.Admin.AuthenticatedLinks'
 import UnauthenticatedLinks from './Navigation.UnauthenticatedLinks'
 
 export default ({ currentUserId, logoutUser }) => (

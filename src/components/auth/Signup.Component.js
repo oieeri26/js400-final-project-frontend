@@ -5,8 +5,10 @@ class Form extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: '',
-      password: ''
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -35,7 +37,8 @@ class Form extends React.Component {
             onChange={this.handleChange}
             name='email'
             type='text'
-            value={this.state.email} />
+            value={this.state.email} 
+            required />
         </div>
         <div className='form-group col-md-6'>
           <label htmlFor='password'>Password</label>
@@ -45,7 +48,8 @@ class Form extends React.Component {
             onChange={this.handleChange}
             name='password'
             type='password'
-            value={this.state.password} />
+            value={this.state.password} 
+            required />
         </div>
         <div className='form-group col-md-6'>
           <label htmlFor='firstName'>First Name</label>
@@ -55,7 +59,8 @@ class Form extends React.Component {
             onChange={this.handleChange}
             name='firstName'
             type='firstName'
-            value={this.state.firstName} />
+            value={this.state.firstName} 
+            required />
         </div>
         <div className='form-group col-md-6'>
           <label htmlFor='lastName'>Last Name</label>
@@ -65,7 +70,8 @@ class Form extends React.Component {
             onChange={this.handleChange}
             name='lastName'
             type='lastName'
-            value={this.state.lastName} />
+            value={this.state.lastName} 
+            required />
         </div>
         </div>
         <button type='submit' className='btn btn-primary'>Submit</button>

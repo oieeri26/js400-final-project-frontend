@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
 // Helpers
 import * as auth from '../api/auth'
@@ -17,6 +17,7 @@ class App extends React.Component {
     super()
     this.state = {
       currentUserId: null,
+      currentUserName: null,
       loading: true
     }
 
@@ -24,11 +25,11 @@ class App extends React.Component {
     this.logoutUser = this.logoutUser.bind(this)
     this.signupUser = this.signupUser.bind(this)
   }
-  
+
   async componentDidMount () {
     if (token.getToken()) {
       const { user } = await auth.profile();
-        this.setState({ currentUserId: user._id, loading: false });
+        this.setState({ currentUserId: user._id, currentUserName: user.name, loading: false });
       } else {
       this.setState({ currentUserId: null, loading: false })
     }
@@ -41,6 +42,7 @@ class App extends React.Component {
     const profile = await auth.profile()
     if (profile.status === 401) {
       alert('Username or password is incorrect!')
+      this.setState({ showAlert: true })
     } else {
       this.setState({ currentUserId: profile.user._id })
     } 
@@ -66,34 +68,35 @@ class App extends React.Component {
   }
 
   render () {
-    const { currentUserId, loading } = this.state
-    if (loading) return "loading..." 
+    const { currentUserId, currentUserName, loading } = this.state
+    if (loading) return <span />
 
     return (
-      <div>
-        <Router>
+      <Router>
         <Header />
         <Navigation
-            currentUserId={currentUserId}
-            logoutUser={this.logoutUser} />
-         <Switch>
+          currentUserId={currentUserId}
+          currentUserName={currentUserName}
+          logoutUser={this.logoutUser} />
+        <Switch>
           <Route path='/login' exact component={() => {
             return currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} />
           }} />
           <Route path='/signup' exact component={() => {
             return currentUserId ? <Redirect to='/users' /> : <Signup onSubmit={this.signupUser} />
           }} />
-          <Route path='/' render={() => {
+
+          <Route path='/users' render={() => {
             return currentUserId
               ? <UsersContainer currentUserId={currentUserId} />
               : <Redirect to='/login' />
           }} />
+
           <Redirect to='/login' />
         </Switch>
-        </Router>
-      </div>
-    );
+      </Router>
+    )
   }
 }
 
-export default App;
+export default App
