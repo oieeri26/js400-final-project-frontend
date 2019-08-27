@@ -4,7 +4,7 @@ import Actions from './List.Actions'
 
 export default ({ currentUserId, destroyAssignment, user }) => {
   const posts = user.posts.map(post => (
-    <div key={post._id} className='card'>
+    <div key={post._id} className='card text-muted d-flex'>
       <div className='card-body'>
         <p className='card-text'>{ post.assignmentTitle }</p>
         <p className='card-text'>{ post.projectDescription}</p>

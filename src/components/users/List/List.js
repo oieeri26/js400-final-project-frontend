@@ -1,20 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 export default ({ users }) => {
   const lis = users.map(user => (
-    <li key={user._id}>
-      <Link to={`/users/${user._id}/posts`}>
-        {user.firstName} {user.lastName} {user.email}
-      </Link>
-    </li>
+    <div key={user._id} className="p-2 bd-highlight border card-footer">
+      {/* <Link to={`/users/${user._id}/posts`}> */}
+        {user.firstName} {user.lastName} - {user.email}
+      {/* </Link> */}
+    </div>
   ))
 
   return (
     <>
-      <p>
-        { lis }
-      </p>
+      <div class="d-flex flex-column bd-highlight mb-3"> 
+      { lis }
+      </div>
     </>
   )
 }

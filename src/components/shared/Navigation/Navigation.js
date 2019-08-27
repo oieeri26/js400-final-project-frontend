@@ -5,7 +5,7 @@ import AuthenticatedStudentLinks from './Navigation.Student.AuthenticatedLinks'
 import UnauthenticatedLinks from './Navigation.UnauthenticatedLinks'
 
 export default ({ currentUserId, logoutUser }) => (
-  <section className='bg-light border-bottom mb-4'>
+  <section className='bg-dark border-bottom mb-4'>
     <div className='container'>
       { 
         currentUserId 
