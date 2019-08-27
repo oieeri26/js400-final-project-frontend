@@ -18,7 +18,7 @@ class Container extends React.Component {
     }
 
     this.refreshUsers = this.refreshUsers.bind(this)
-    this.editUser = this.editUser.bind(this)
+    // this.editUser = this.editUser.bind(this)
 
   }
 
@@ -32,13 +32,13 @@ class Container extends React.Component {
     this.setState({ users: response })
   }
 
-  async editUser (user) {
-    const { currentUserId, history } = this.props
-    await users.updateUser({ user: { _id: currentUserId }, user })
-    await this.refreshUsers()
+  // async editUser (user) {
+  //   const { currentUserId, history } = this.props
+  //   await users.updateUser({ user: { _id: currentUserId }, user })
+  //   await this.refreshUsers()
 
-    history.push(`/users/${currentUserId}/posts`)
-  }
+  //   history.push(`/users/${currentUserId}/posts`)
+  // }
 
   render () {
     const { currentUserId } = this.props
@@ -47,7 +47,7 @@ class Container extends React.Component {
 
     return (
       <main className='container'>
-        <Route path='/users' exact component={() => <List users={users} />} />
+        <Route path='/students' exact component={() => <List users={users} />} />
         <PostsContainer
           currentUserId={currentUserId}
           refreshUsers={this.refreshUsers}

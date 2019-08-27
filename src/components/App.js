@@ -68,7 +68,6 @@ class App extends React.Component {
 
   render () {
     const { currentUserId, admin, loading } = this.state
-    console.log(this.state)
     if (loading) return <span />
     return (
       <Router>
@@ -79,13 +78,13 @@ class App extends React.Component {
           logoutUser={this.logoutUser} />
         <Switch>
           <Route path='/login' exact component={() => {
-            return currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} />
+            return currentUserId ? <Redirect to={`/${currentUserId}`} /> : <Login onSubmit={this.loginUser} /> //{`/${currentUserId}`}
           }} />
           <Route path='/signup' exact component={() => {
-            return currentUserId ? <Redirect to='/users' /> : <Signup onSubmit={this.signupUser} />
+            return currentUserId ? <Redirect to={`/${currentUserId}`} /> : <Signup onSubmit={this.signupUser} />
           }} />
 
-          <Route path='/users' render={() => {
+          <Route path='/' render={() => {
             return currentUserId
               ? <UsersContainer currentUserId={currentUserId} />
               : <Redirect to='/login' />
