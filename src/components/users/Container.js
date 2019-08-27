@@ -16,10 +16,7 @@ class Container extends React.Component {
       users: [],
       loading: true
     }
-
     this.refreshUsers = this.refreshUsers.bind(this)
-    // this.editUser = this.editUser.bind(this)
-
   }
 
   async componentDidMount () {

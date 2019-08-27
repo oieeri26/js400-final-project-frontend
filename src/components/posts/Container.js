@@ -69,7 +69,7 @@ class Container extends React.Component {
               user={user} />
           )
         }} />
-        <Route path='/assignments/new' exact component={() => {
+        <Route path='/assignments/:userId/new' exact component={() => {
           return <NewAssignment onSubmit={this.createAssignment} />
         }} />
         <Route path='/:postId/edit' exact component={({ match }) => {

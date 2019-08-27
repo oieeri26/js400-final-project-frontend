@@ -17,7 +17,7 @@ const AuthenticatedLinks = ({ currentUserId, logoutUser, history }) => {
         <Link className='nav-link' to='/students'>All Students</Link>
       </li>
       <li className='nav-item'>
-        <Link className='nav-link' to={`/assignments/new`}> 
+        <Link className='nav-link' to={`/assignments/${currentUserId}/new`}> 
           Create New Assignment
         </Link>
       </li>
