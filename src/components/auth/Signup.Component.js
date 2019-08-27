@@ -74,7 +74,7 @@ class Form extends React.Component {
             required />
         </div>
         </div>
-        <button type='submit' className='btn-basic'>Submit</button>
+        <button type='signup' className='btn-basic'>Signup</button>
       </form>
     )
   }

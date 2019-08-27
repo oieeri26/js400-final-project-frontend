@@ -41,6 +41,16 @@ export default class Form extends React.Component {
             value={this.state.assignmentTitle} />
         </div>
         <div className='form-group'>
+          <label htmlFor='projectLink'>Project Link</label>
+          <input
+            className='form-control'
+            id='projectLink'
+            onChange={this.handleChange}
+            name='projectLink'
+            type='text'
+            value={this.state.projectLink} />
+        </div>
+        <div className='form-group'>
           <label htmlFor='projectDescription'>Project Description</label>
           <textarea
             className='form-control'
@@ -50,17 +60,7 @@ export default class Form extends React.Component {
             type='text'
             value={this.state.projectDescription} />
         </div>
-        <div className='form-group'>
-          <label htmlFor='projectLink'>Project Link</label>
-          <textarea
-            className='form-control'
-            id='projectLink'
-            onChange={this.handleChange}
-            name='projectLink'
-            type='text'
-            value={this.state.projectLink} />
-        </div>
-        <button type='submit' className='btn btn-primary'>Submit</button>
+        <button type='submit' className='btn-basic'>Submit</button>
       </form>
     )
   }

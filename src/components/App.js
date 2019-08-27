@@ -38,13 +38,13 @@ class App extends React.Component {
   async loginUser (user) {
     const response = await auth.login(user)
     await token.setToken(response)
-    
     const profile = await auth.profile()
+    console.log(profile)
     if (profile.status === 401) {
       alert('Username or password is incorrect!')
       this.setState({ showAlert: true })
     } else {
-      this.setState({ currentUserId: profile.user._id, admin: user.admin })
+      this.setState({ currentUserId: profile.user._id, admin: profile.admin })
     } 
   }
 
@@ -68,8 +68,8 @@ class App extends React.Component {
 
   render () {
     const { currentUserId, admin, loading } = this.state
+    console.log(admin)
     if (loading) return <span />
-    // users/${currentUserId}/assignments
     return (
       <Router>
         <Header />
@@ -79,16 +79,26 @@ class App extends React.Component {
           logoutUser={this.logoutUser} />
         <Switch>
           <Route path='/login' exact component={() => {
-            return currentUserId ? <Redirect to={`/users/${currentUserId}/assignments`} /> : <Login onSubmit={this.loginUser} /> 
+            return currentUserId 
+            ? admin 
+            ? <Redirect to={`/students`} /> 
+            : <Redirect to={`/users/${currentUserId}/assignments`} /> 
+            : <Login onSubmit={this.loginUser} /> 
           }} />
           <Route path='/signup' exact component={() => {
-            return currentUserId ? <Redirect to={`/users/${currentUserId}/assignments`} /> : <Signup onSubmit={this.signupUser} />
+            return currentUserId 
+            ? admin 
+            ? <Redirect to={`/students`} /> 
+            : <Redirect to={`/users/${currentUserId}/assignments`} /> 
+            : <Signup onSubmit={this.loginUser} /> 
           }} />
 
           <Route path='/' render={() => {
-            return currentUserId
-              ? <UsersContainer currentUserId={currentUserId} />
-              : <Redirect to='/login' />
+            return currentUserId 
+            ? <UsersContainer 
+            currentUserId={currentUserId} 
+            admin={admin} /> 
+            : <Redirect to='/login' />
           }} />
 
           <Redirect to='/login' />

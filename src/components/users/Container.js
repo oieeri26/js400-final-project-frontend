@@ -7,7 +7,7 @@ import * as users from '../../api/users'
 
 // Components
 import List from './List/List'
-import PostsContainer from '../assignments/Container'
+import AssignmentsContainer from '../assignments/Container'
 
 class Container extends React.Component {
   constructor (props) {
@@ -30,17 +30,19 @@ class Container extends React.Component {
   }
 
   render () {
-    const { currentUserId } = this.props
+    const { currentUserId, admin } = this.props
+    // console.log(admin)
     const { users, loading } = this.state
     if (loading) return <span/>
 
     return (
       <main className='container'>
-        <Route path='/students' exact component={() => <List users={users} />} />
-        <PostsContainer
+        <Route path='/students' exact component={() => <List users={users} admin={admin}/>} />
+        <AssignmentsContainer
           currentUserId={currentUserId}
           refreshUsers={this.refreshUsers}
-          users={users} />
+          users={users} 
+          admin={admin}/>
       </main>
     )
   }
