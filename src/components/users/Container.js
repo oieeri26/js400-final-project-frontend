@@ -7,7 +7,7 @@ import * as users from '../../api/users'
 
 // Components
 import List from './List/List'
-import PostsContainer from '../posts/Container'
+import PostsContainer from '../assignments/Container'
 
 class Container extends React.Component {
   constructor (props) {
@@ -28,14 +28,6 @@ class Container extends React.Component {
     const { response } = await users.fetchUsers()
     this.setState({ users: response })
   }
-
-  // async editUser (user) {
-  //   const { currentUserId, history } = this.props
-  //   await users.updateUser({ user: { _id: currentUserId }, user })
-  //   await this.refreshUsers()
-
-  //   history.push(`/users/${currentUserId}/posts`)
-  // }
 
   render () {
     const { currentUserId } = this.props

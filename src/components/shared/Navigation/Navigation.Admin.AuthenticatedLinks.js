@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
-const AuthenticatedLinks = ({ currentUserId, isAdmin, logoutUser, history }) => {
+const AuthenticatedLinks = ({ currentUserId, logoutUser, history }) => {
   const logout = () => {
     logoutUser()
     history.push('/login')
@@ -10,7 +10,7 @@ const AuthenticatedLinks = ({ currentUserId, isAdmin, logoutUser, history }) => 
   return (
     <ul className='nav justify-content'>
       <li className='nav-item'>
-        <Link className='nav-link' to={`/users/5d64723f31a7b54f2870f44a/posts`}>All Students</Link>
+        <Link className='nav-link' to={`/students`}>All Students</Link>
       </li>
       <li className='nav-item'>
         <Link className='nav-link' to='/students'>Ungraded Assignments</Link>

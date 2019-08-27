@@ -28,7 +28,7 @@ class Container extends React.Component {
       const { currentUserId, history, refreshUsers } = this.props
       await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
       await refreshUsers()
-      history.push(`/students`)
+      history.push(`/users/${currentUserId}/assignments`)
     }
   }
   
@@ -38,7 +38,7 @@ class Container extends React.Component {
     await assignments.destroyAssignment({ user: { _id: currentUserId }, assignment })
     await refreshUsers()
     
-    history.push(`/students`)
+    history.push(`/users/${currentUserId}/assignments`)
   }
 
   async editAssignment (assignment) {
@@ -52,29 +52,29 @@ class Container extends React.Component {
       const { currentUserId, history, refreshUsers } = this.props
       await assignments.updateAssignment({ user: { _id: currentUserId }, assignment })
       await refreshUsers()
-      history.push(`/students`)
+      history.push(`/users/${currentUserId}/assignments`)
     }
   }
 
   render () {
     const { currentUserId, users } = this.props
     return (
-      <>
-        <Route path='/users/:userId/posts' exact component={({ match }) => {
+      <> 
+        <Route path='/users/:userId/assignments' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
           return (
             <List
               currentUserId={currentUserId}
               destroyAssignment={this.destroyAssignment}
               user={user} />
-          )
+          ) 
         }} />
-        <Route path='/assignments/:userId/new' exact component={() => {
+        <Route path='/assignments/new' exact component={() => {
           return <NewAssignment onSubmit={this.createAssignment} />
         }} />
-        <Route path='/:postId/edit' exact component={({ match }) => {
+        <Route path='/users/:userId/assignments/:postId/edit' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
-          const assignment = user.posts.find(user => user._id === match.params.postId)
+          const assignment = user.assignments.find(user => user._id === match.params.postId)
           return <EditAssignment onSubmit={this.editAssignment} assignment={assignment} />
         }} />
       </>
