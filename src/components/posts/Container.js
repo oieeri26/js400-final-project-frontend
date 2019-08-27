@@ -6,8 +6,8 @@ import * as assignments from '../../api/assignments'
 
 // Components
 import List from './List/List'
-import EditForm from './Form/Edit.Form'
-import NewForm from './Form/New.Form'
+import EditAssignment from './Form/Edit.Assignment'
+import NewAssignment from './Form/New.Assignment'
 
 class Container extends React.Component {
   constructor (props) {
@@ -70,12 +70,12 @@ class Container extends React.Component {
           )
         }} />
         <Route path='/users/:userId/posts/new' exact component={() => {
-          return <NewForm onSubmit={this.createAssignment} />
+          return <NewAssignment onSubmit={this.createAssignment} />
         }} />
         <Route path='/users/:userId/posts/:postId/edit' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
           const assignment = user.posts.find(user => user._id === match.params.postId)
-          return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
+          return <EditAssignment onSubmit={this.editAssignment} assignment={assignment} />
         }} />
       </>
     )
