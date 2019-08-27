@@ -12,7 +12,7 @@ export default ({ users }) => {
 
   return (
     <>
-      <div class="d-flex flex-column bd-highlight mb-3"> 
+      <div className="d-flex flex-column bd-highlight mb-3"> 
       { lis }
       </div>
     </>
