@@ -17,7 +17,7 @@ class App extends React.Component {
     super()
     this.state = {
       currentUserId: null,
-      isAdmin: null,
+      admin: null,
       loading: true
     }
 
@@ -29,10 +29,9 @@ class App extends React.Component {
   async componentDidMount () {
     if (token.getToken()) {
       const { user } = await auth.profile();
-        this.setState({ currentUserId: user._id, isAdmin: user.isAdmin, loading: false });
-        console.log(user)
+        this.setState({ currentUserId: user._id, admin: user.admin, loading: false });
       } else {
-      this.setState({ currentUserId: null, loading: false })
+      this.setState({ currentUserId: null, admin: null, loading: false })
     }
   }
 
@@ -45,13 +44,13 @@ class App extends React.Component {
       alert('Username or password is incorrect!')
       this.setState({ showAlert: true })
     } else {
-      this.setState({ currentUserId: profile.user._id })
+      this.setState({ currentUserId: profile.user._id, admin: user.admin })
     } 
   }
 
   logoutUser () {
     token.clearToken()
-    this.setState({ currentUserId: null })
+    this.setState({ currentUserId: null, admin: null })
   }
 
   async signupUser (user) {
@@ -59,7 +58,6 @@ class App extends React.Component {
     await token.setToken(response)
     
     const profile = await auth.profile()
-    console.log(profile)
     if (profile.status === 401) {
       alert('Username already exists!')
       this.setState({ showAlert: true })
@@ -69,15 +67,15 @@ class App extends React.Component {
   }
 
   render () {
-    const { currentUserId, isAdmin, loading } = this.state
+    const { currentUserId, admin, loading } = this.state
+    console.log(this.state)
     if (loading) return <span />
-
     return (
       <Router>
         <Header />
         <Navigation
           currentUserId={currentUserId}
-          isAdmin={isAdmin}
+          admin={admin}
           logoutUser={this.logoutUser} />
         <Switch>
           <Route path='/login' exact component={() => {
