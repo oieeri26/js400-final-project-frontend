@@ -11,7 +11,7 @@ const AuthenticatedLinks = ({ currentUserId, logoutUser, history }) => {
   return (
     <ul className='nav justify-content'>
       <li className='nav-item'>
-        <Link className='nav-link' to={`/assignments/${currentUserId}`}>Home</Link>
+        <Link className='nav-link' to={`/users/${currentUserId}`}>Home</Link>
       </li>
       <li className='nav-item'>
         <Link className='nav-link' to={`/students`}>All Students</Link>

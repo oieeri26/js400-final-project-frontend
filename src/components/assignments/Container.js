@@ -68,7 +68,7 @@ class Container extends React.Component {
     const { currentUserId, users } = this.props
     return (
       <> 
-        <Route path='/assignments/:userId' exact component={({ match }) => {
+        <Route path='/users/:userId' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
           return (
             <List
