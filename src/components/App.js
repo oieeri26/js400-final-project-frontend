@@ -39,7 +39,6 @@ class App extends React.Component {
     const response = await auth.login(user)
     await token.setToken(response)
     const profile = await auth.profile()
-    console.log(profile)
     if (profile.status === 401) {
       alert('Username or password is incorrect!')
       this.setState({ showAlert: true })
@@ -56,7 +55,6 @@ class App extends React.Component {
   async signupUser (user) {
     const response = await auth.signup(user)
     await token.setToken(response)
-    
     const profile = await auth.profile()
     if (profile.status === 401) {
       alert('Username already exists!')
@@ -89,7 +87,7 @@ class App extends React.Component {
             ? admin 
             ? <Redirect to={`/students`} /> 
             : <Redirect to={`/users/${currentUserId}`} /> 
-            : <Signup onSubmit={this.loginUser} /> 
+            : <Signup onSubmit={this.signupUser} /> 
           }} />
 
           <Route path='/' render={() => {
