@@ -30,6 +30,14 @@ class Container extends React.Component {
       await refreshUsers()
       history.push(`/users/${currentUserId}/assignments`)
     }
+
+    // const { currentUserId, history, refreshUsers } = this.props
+    // try {
+    //   await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
+    //   await refreshUsers()
+    // } catch (errors) {
+    //   this.setState({ errors: errors }) // add errors: [] to top
+    // }
   }
   
   async destroyAssignment (assignment) {

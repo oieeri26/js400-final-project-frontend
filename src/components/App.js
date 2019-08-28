@@ -44,7 +44,7 @@ class App extends React.Component {
       alert('Username or password is incorrect!')
       this.setState({ showAlert: true })
     } else {
-      this.setState({ currentUserId: profile.user._id, admin: profile.admin })
+      this.setState({ currentUserId: profile.user._id, admin: profile.user.admin })
     } 
   }
 
@@ -68,7 +68,6 @@ class App extends React.Component {
 
   render () {
     const { currentUserId, admin, loading } = this.state
-    console.log(admin)
     if (loading) return <span />
     return (
       <Router>
