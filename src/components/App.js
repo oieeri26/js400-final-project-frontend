@@ -69,6 +69,7 @@ class App extends React.Component {
   render () {
     const { currentUserId, admin, loading } = this.state
     if (loading) return <span />
+    // /users/${currentUserId}
     return (
       <Router>
         <Header />
@@ -81,14 +82,14 @@ class App extends React.Component {
             return currentUserId 
             ? admin 
             ? <Redirect to={`/students`} /> 
-            : <Redirect to={`/users/${currentUserId}/assignments`} /> 
+            : <Redirect to={`/assignments/${currentUserId}`} /> 
             : <Login onSubmit={this.loginUser} /> 
           }} />
           <Route path='/signup' exact component={() => {
             return currentUserId 
             ? admin 
             ? <Redirect to={`/students`} /> 
-            : <Redirect to={`/users/${currentUserId}/assignments`} /> 
+            : <Redirect to={`/assignments/${currentUserId}`} /> 
             : <Signup onSubmit={this.loginUser} /> 
           }} />
 

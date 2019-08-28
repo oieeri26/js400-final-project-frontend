@@ -28,7 +28,7 @@ class Container extends React.Component {
       const { currentUserId, history, refreshUsers } = this.props
       await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
       await refreshUsers()
-      history.push(`/users/${currentUserId}/assignments`)
+      history.push(`/users/${currentUserId}`)
     }
 
     // const { currentUserId, history, refreshUsers } = this.props
@@ -46,7 +46,7 @@ class Container extends React.Component {
     await assignments.destroyAssignment({ user: { _id: currentUserId }, assignment })
     await refreshUsers()
     
-    history.push(`/users/${currentUserId}/assignments`)
+    history.push(`/users/${currentUserId}`)
   }
 
   async editAssignment (assignment) {
@@ -60,7 +60,7 @@ class Container extends React.Component {
       const { currentUserId, history, refreshUsers } = this.props
       await assignments.updateAssignment({ user: { _id: currentUserId }, assignment })
       await refreshUsers()
-      history.push(`/users/${currentUserId}/assignments`)
+      history.push(`/users/${currentUserId}`)
     }
   }
 
@@ -68,7 +68,7 @@ class Container extends React.Component {
     const { currentUserId, users } = this.props
     return (
       <> 
-        <Route path='/users/:userId/assignments' exact component={({ match }) => {
+        <Route path='/assignments/:userId' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
           return (
             <List

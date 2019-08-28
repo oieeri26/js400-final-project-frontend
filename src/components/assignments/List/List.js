@@ -7,8 +7,8 @@ export default ({ currentUserId, destroyAssignment, user }) => {
     <div key={assignment._id} className='card text-muted d-flex'>
       <div className='card-body'>
         <p className='card-text'>{ assignment.assignmentTitle }</p>
-        <p className='card-text'>{ assignment.projectDescription}</p>
-        <p className='card-text'>{ assignment.projectLink}</p>
+        <p className='card-text'>{ assignment.projectDescription }</p>
+        <p className='card-text'>{ assignment.projectLink }</p>
       </div>
       <Actions
         currentUserId={currentUserId}
