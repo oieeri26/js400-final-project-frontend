@@ -53,9 +53,11 @@ class App extends React.Component {
   }
 
   async signupUser (user) {
-    if (user.password.length < 8) {
+    if (!/\S+@\S+\.\S+/.test(user.password)) {
+      alert('Not a valid email!')
+    } else if (user.password.length < 8) {
       alert('Password must be at least 8 characters!')
-    } else if (user.firstName.length === 0 || user.lastName.length) {
+    } else if (user.firstName.length === 0 || user.lastName.length === 0) {
       alert('You must include your first and last name!')
     } else {
       const response = await auth.signup(user)
