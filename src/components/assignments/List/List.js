@@ -2,8 +2,8 @@ import React from 'react'
 
 import Actions from './List.Actions'
 
-export default ({ currentUserId, destroyAssignment, user }) => {
-  const assignments = user.assignments.map(assignment => (
+export default ({ currentUserId, destroyAssignment, users }) => {
+  const assignments = users.assignments.map(assignment => (
     <div key={assignment._id} className='card text-muted d-flex'>
       <div className='card-body'>
         <p className='card-text'>{ assignment.assignmentTitle }</p>
@@ -14,7 +14,7 @@ export default ({ currentUserId, destroyAssignment, user }) => {
         currentUserId={currentUserId}
         destroyAssignment={destroyAssignment}
         post={assignment}
-        user={user} />
+        user={users} />
     </div>
   ))
 

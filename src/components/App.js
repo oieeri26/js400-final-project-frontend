@@ -53,16 +53,22 @@ class App extends React.Component {
   }
 
   async signupUser (user) {
-    const response = await auth.signup(user)
-    await token.setToken(response)
-    const profile = await auth.profile()
-    if (profile.status === 401) {
-      alert('Username already exists!')
-      this.setState({ showAlert: true })
+    if (user.password.length < 8) {
+      alert('Password must be at least 8 characters!')
+    } else if (user.firstName.length === 0 || user.lastName.length) {
+      alert('You must include your first and last name!')
     } else {
-      this.setState({ currentUserId: profile.user._id })
+      const response = await auth.signup(user)
+      await token.setToken(response)
+      const profile = await auth.profile()
+        if (profile.status === 401) {
+          alert('Username already exists!')
+          this.setState({ showAlert: true })
+      } else {
+        this.setState({ currentUserId: profile.user._id })
     }
   }
+}
 
   render () {
     const { currentUserId, admin, loading } = this.state

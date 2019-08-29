@@ -6,6 +6,8 @@ import * as assignments from '../../api/assignments'
 
 // Components
 import List from './List/List'
+import ListGraded from './List/List.Graded'
+import ListUngraded from './List/List.Graded'
 import EditAssignment from './Form/Edit.Assignment'
 import NewAssignment from './Form/New.Assignment'
 
@@ -65,7 +67,7 @@ class Container extends React.Component {
   }
 
   render () {
-    const { currentUserId, users } = this.props
+    const { currentUserId, users, admin } = this.props
     return (
       <> 
         <Route path='/users/:userId' exact component={({ match }) => {
@@ -82,9 +84,16 @@ class Container extends React.Component {
         }} />
         <Route path='/users/:userId/assignments/:postId/edit' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
+          console.log(users)
           const assignment = user.assignments.find(user => user._id === match.params.postId)
           return <EditAssignment onSubmit={this.editAssignment} assignment={assignment} />
         }} />
+        {/* <Route path='/assignments/ungraded' exact component={({ match }) => {
+          const user = users.find(user => user._id === match.params.userId)
+          return <List destroyPost={this.destroyPost} user={user} />
+        }} /> */}
+        <Route path='/assignments/ungraded' exact component={() => <ListUngraded users={users} admin={admin} />} />
+        <Route path='/assignments/graded' exact component={() => <ListGraded users={users} admin={admin} />} />
       </>
     )
   }

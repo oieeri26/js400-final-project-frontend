@@ -31,7 +31,6 @@ class Container extends React.Component {
 
   render () {
     const { currentUserId, admin } = this.props
-    // console.log(admin)
     const { users, loading } = this.state
     if (loading) return <span/>
 
