@@ -7,7 +7,7 @@ import * as assignments from '../../api/assignments'
 // Components
 import List from './List/List'
 import ListGraded from './List/List.Graded'
-import ListUngraded from './List/List.Graded'
+import ListUngraded from './List/List.Ungraded'
 import EditAssignment from './Form/Edit.Assignment'
 import NewAssignment from './Form/New.Assignment'
 
