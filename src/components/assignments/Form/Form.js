@@ -61,7 +61,6 @@ export default class Form extends React.Component {
             value={this.state.projectDescription} />
         </div>
         <button type='submit' className='btn-basic'>Submit</button>
-        {/* { this.state.errors.length > 0 && <p>You messed up</p>} */}
       </form>
     )
   }

@@ -14,19 +14,15 @@ export default ({ currentUserId, destroyAssignment, users }) => {
             <input
               className='form-control'
               id='grade'
-              // onChange={this.handleChange}
               name='grade'
               type='numeric'
-              // value={this.state.assignmentTitle} 
               />
             <label htmlFor='total'>Total:</label>
             <input
               className='form-control'
               id='total'
-              // onChange={this.handleChange}
               name='total'
               type='numeric'
-              // value={this.state.assignmentTitle} 
               />
                <button type='submit' className='btn-basic'>Submit</button>
           </form>
